@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Heroes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <Style>
+      h1{
+          text-align: center;
+          background: rgb(241, 42, 42);
+          border: solid black 2px;
+          height: 2em;
+          
+        }
+      div{
+        background: rgb(253, 28, 28);
+      }
+      #uwu{
+          text-align: center;
+      }
+      button{
+          margin-left: 31em;
+      }
+      .centrar{
+       display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+     }
+  </Style>
+</head>
+<body background="marvel3.png">
+  <div class="container">
+
+    <h1><b>Super Heroes</b></h1>
+
+    <br><br>
+    <form action="#">
+      <div class="form-group" id="uwu">
+       <label for="usr"><b>Digite el codigo de su superheroe:</b></label>
+       <input type="text" class="form-control" id="superhero" placeholder="Digita un codigo entre 1 y el 731">
+      </div>
+      <br>
+      <button type="button" class="btn btn-dark" id="Consulta">Consulta Heroe o Villano</button>
+    </form>
+
+    <div id="responsee">
+
+    </div>
+  </div>
+
+
+    <script>
+
+      const brenviar = document.getElementById("Consulta");
+
+      const divrespuesta = document.getElementById("responsee");
+
+      brenviar.addEventListener("click", prueba);
+
+      function prueba(e){
+          e.preventDefault();
+
+          console.log(document.getElementById('superhero').value);
+
+          fetch("https://www.superheroapi.com/api.php/2166331217001330/"+document.getElementById('superhero').value)
+              .then( function(response){
+                  return  response.json();
+                
+              }).then(function(data){
+                  console.log(data);
+
+                  var respu = '';
+          
+                  divrespuesta.innerHTML= "<p>Nombre: "+ data.name +
+                  "</p><p>Ocupación: "+ data.work.occupation +
+                  "</p><p>Genero: "+ data.appearance.gender +
+                  "</p><p>Raza: "+ data.appearance.race +
+                  "</p><img src='"+ data.image.url +
+                  "' width='400px' height='350px' class='centrar'></img>";
+
+     }).catch(function(error){
+
+      alert("los codigos son desde el 1 hasta el 731, no se pase "+ error);
+                  
+     });
+
+              
+          
+      }
+
+      
+  
+  
+  </script>
+    
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
